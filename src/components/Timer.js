@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styled from "styled-components";
 
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { AddInput } from "./Stopwatch";
+import { AddInput } from "../common/shared";
 
 function Timer({ startTime, endTime, isWorking }) {
     const [min, setMin] = useState(40);
 
-    const timer = 1000 * 60 * min;
+    const timer = useMemo(() => 1000 * 60 * min, [min]);
+
     const diff = endTime - startTime;
     const progress = (diff / timer) * 100;
     const diffMin = parseInt(diff / 1000 / 60);
@@ -17,7 +18,7 @@ function Timer({ startTime, endTime, isWorking }) {
         <FixedContainer>
             <InnnerContainer>
                 <CircularProgressbar
-                    value={progress}
+                    value={100 - progress}
                     strokeWidth={1}
                     styles={buildStyles({
                         pathTransition: "easeInOut",
@@ -49,15 +50,6 @@ function Timer({ startTime, endTime, isWorking }) {
                 </Container>
             </InnnerContainer>
         </FixedContainer>
-        // <Container>
-        //     {/* {timestring} */}
-        //     <AddInput />
-
-        //     <ProgressBar>
-        //         <UnderProgressBar />
-        //         <OverProgressBar />
-        //     </ProgressBar>
-        // </Container>
     );
 }
 
@@ -78,26 +70,6 @@ const FixedContainer = styled.div`
     }
 `;
 
-// const ProgressBar = styled.div`
-//     position: relative;
-//     width: 100%;
-//     height: 12px;
-//     border-radius: 6px;
-//     overflow: hidden;
-// `;
-// const OverProgressBar = styled.div`
-//     position: absolute;
-//     width: 70%;
-//     height: 100%;
-//     background-color: rgb(255, 214, 10);
-// `;
-// const UnderProgressBar = styled.div`
-//     position: absolute;
-//     width: 100%;
-//     height: 100%;
-//     background-color: rgb(144, 144, 147);
-// `;
-
 const Container = styled.div`
     top: 60px;
     left: 50%;
@@ -106,11 +78,8 @@ const Container = styled.div`
     padding: 4px;
     margin-bottom: 45px;
     border-radius: 20px;
-    /* background-color: rgba(0, 0, 0, 0.1); */
 
     display: grid;
-    /* grid-template-rows: 100px; */
-    /* grid-template-columns: 1fr; */
     justify-content: center;
     align-items: center;
 

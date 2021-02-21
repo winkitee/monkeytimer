@@ -7,8 +7,8 @@ import { FaUserCircle } from "react-icons/fa";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-// import Timer from "./components/Timer";
-import Stopwatch from "./components/Stopwatch";
+import Main from "./components/Main";
+import { setStopwatchDataToLocalStorage } from "./common/api";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -25,18 +25,19 @@ function App() {
     const signOut = async () => {
         try {
             await firebase.auth().signOut();
+            localStorage.clear();
         } catch (error) {
             console.log(error);
         }
     };
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
+                await setStopwatchDataToLocalStorage();
                 setUser(user);
-                console.log(user);
             } else {
-                setUser(user);
+                setUser(null);
             }
         });
     }, []);
@@ -46,7 +47,7 @@ function App() {
             <div className="App-Container">
                 <Header>monkeytimer</Header>
 
-                <Stopwatch />
+                <Main user={Boolean(user)} />
 
                 <NavMenu>
                     <IconContext.Provider
