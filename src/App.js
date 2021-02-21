@@ -13,7 +13,7 @@ import { setStopwatchDataToLocalStorage } from "./common/api";
 
 function App() {
     const [user, setUser] = useState(null);
-    const [is_loading, set_is_loading] = useState(false);
+    const [is_loading, set_is_loading] = useState(true);
 
     const signupWithGoogle = async () => {
         set_is_loading(true);
