@@ -1,0 +1,6 @@
+{
+    "hosting": {
+      "site": "monkeytimer",
+      "public": "public"
+    }
+  }
