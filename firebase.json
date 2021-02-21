@@ -1,6 +1,17 @@
 {
-    "hosting": {
-      "site": "monkeytimer",
-      "public": "public"
-    }
+  "hosting": {
+    "public": "build",
+    "site": "monkeytimer",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
+}
