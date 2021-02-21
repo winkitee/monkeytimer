@@ -8,36 +8,52 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 import Main from "./components/Main";
+import Loading from "./common/Loading";
 import { setStopwatchDataToLocalStorage } from "./common/api";
 
 function App() {
     const [user, setUser] = useState(null);
+    const [is_loading, set_is_loading] = useState(false);
+
     const signupWithGoogle = async () => {
+        set_is_loading(true);
         const provider = new firebase.auth.GoogleAuthProvider();
 
         try {
-            firebase.auth().signInWithPopup(provider);
+            await firebase.auth().signInWithPopup(provider);
         } catch (error) {
             console.log(error);
+        } finally {
+            set_is_loading(false);
         }
     };
 
     const signOut = async () => {
+        set_is_loading(true);
         try {
             await firebase.auth().signOut();
             localStorage.clear();
         } catch (error) {
             console.log(error);
+        } finally {
+            set_is_loading(false);
         }
     };
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async (user) => {
-            if (user) {
-                await setStopwatchDataToLocalStorage();
-                setUser(user);
-            } else {
-                setUser(null);
+            set_is_loading(true);
+            try {
+                if (user) {
+                    await setStopwatchDataToLocalStorage();
+                    setUser(user);
+                } else {
+                    setUser(null);
+                }
+            } catch (e) {
+                console.log(e);
+            } finally {
+                set_is_loading(false);
             }
         });
     }, []);
@@ -47,24 +63,31 @@ function App() {
             <div className="App-Container">
                 <Header>monkeytimer</Header>
 
-                <Main user={Boolean(user)} />
-
-                <NavMenu>
-                    <IconContext.Provider
-                        value={{ color: "rgb(144, 144, 147)" }}
-                    >
-                        {user == null ? (
-                            <NavLinkContainer onClick={signupWithGoogle}>
-                                <AiFillGoogleCircle />
-                            </NavLinkContainer>
-                        ) : (
-                            <NavLinkContainer onClick={signOut}>
-                                <FaUserCircle />
-                                <span>{user.displayName}</span>
-                            </NavLinkContainer>
-                        )}
-                    </IconContext.Provider>
-                </NavMenu>
+                {is_loading ? (
+                    <Loading />
+                ) : (
+                    <>
+                        <Main user={Boolean(user)} />
+                        <NavMenu>
+                            <IconContext.Provider
+                                value={{ color: "rgb(144, 144, 147)" }}
+                            >
+                                {user == null ? (
+                                    <NavLinkContainer
+                                        onClick={signupWithGoogle}
+                                    >
+                                        <AiFillGoogleCircle />
+                                    </NavLinkContainer>
+                                ) : (
+                                    <NavLinkContainer onClick={signOut}>
+                                        <FaUserCircle />
+                                        <span>{user.displayName}</span>
+                                    </NavLinkContainer>
+                                )}
+                            </IconContext.Provider>
+                        </NavMenu>
+                    </>
+                )}
             </div>
         </div>
     );
