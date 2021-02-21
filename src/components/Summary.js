@@ -87,6 +87,16 @@ export default function Summary(props) {
                                 scales: {
                                     xAxes: [{ display: false }],
                                 },
+                                tooltips: {
+                                    callbacks: {
+                                        label: function (tooltipItem) {
+                                            return getDiffTimeString(
+                                                timelog[tooltipItem.index]
+                                                    .diffTime
+                                            );
+                                        },
+                                    },
+                                },
                             }}
                         />
                     </GraphContainer>
