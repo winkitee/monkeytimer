@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { AddInput } from "../common/shared";
+import { colors } from '../styles/config'
 
 function Timer({ startTime, endTime, isWorking }) {
     const [min, setMin] = useState(40);
@@ -23,7 +24,7 @@ function Timer({ startTime, endTime, isWorking }) {
                     styles={buildStyles({
                         pathTransition: "easeInOut",
                         pathTransitionDuration: 0.6,
-                        pathColor: "rgba(255, 214, 10, 0.5)",
+                        pathColor: colors.PRIMARY_COLOR,
                         trailColor: "rgba(0, 0, 0, 0.1)",
                     })}
                 />

@@ -65,18 +65,18 @@ export default function Stopwatch(props) {
             );
         }
 
-        const keydownHandlerFirst = (e) => {
-            if (e.code == "Enter") {
-                e.preventDefault();
-                startFocusRef.current.focus();
-            }
-        };
-        if (firstFocusRef.current) {
-            firstFocusRef.current.addEventListener(
-                "keydown",
-                keydownHandlerFirst
-            );
-        }
+        // const keydownHandlerFirst = (e) => {
+        //     if (e.code == "Enter") {
+        //         e.preventDefault();
+        //         startFocusRef.current.focus();
+        //     }
+        // };
+        // if (firstFocusRef.current) {
+        //     firstFocusRef.current.addEventListener(
+        //         "keydown",
+        //         keydownHandlerFirst
+        //     );
+        // }
 
         return () => {
             force1Ref.current &&
@@ -93,16 +93,16 @@ export default function Stopwatch(props) {
                     "keydown",
                     keydownHandlerStart
                 );
-            firstFocusRef.current &&
-                firstFocusRef.current.removeEventListener(
-                    "keydown",
-                    keydownHandlerFirst
-                );
+            // firstFocusRef.current &&
+            //     firstFocusRef.current.removeEventListener(
+            //         "keydown",
+            //         keydownHandlerFirst
+            //     );
         };
     }, [
         force1Ref.current,
         force2Ref.current,
-        firstFocusRef.current,
+        // firstFocusRef.current,
         lastFocusRef.current,
         startFocusRef.current,
     ]);

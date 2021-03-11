@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from '../styles/config'
 
 export const ButtonContainer = styled.div`
     display: grid;
@@ -10,7 +11,7 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
     padding: 10px;
     border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.01);
+    background-color: rgba(255, 255, 255, 0.03);
     border: 3px solid transparent;
     color: white;
     font-weight: 600;
@@ -23,11 +24,11 @@ export const Button = styled.button`
     justify-content: center;
 
     :hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 255, 255, 0.2);
     }
 
     :focus {
-        border: 3px solid rgb(255, 255, 255, 0.1);
+        border: 3px solid rgb(255, 255, 255, 0.2);
         outline: none;
     }
 
@@ -45,7 +46,7 @@ export const AddInput = styled.input`
     background-color: transparent;
     border: 3px solid transparent;
     border-radius: 15px;
-    color: rgb(255, 214, 13);
+    color: ${colors.PRIMARY_COLOR};
     transition: all 0.3s;
 
     :focus {
@@ -62,7 +63,7 @@ export const AddInput = styled.input`
 
 export const CaptionButton = styled.div`
     display: inline;
-    ${(props) => props.is_on && "color: rgb(255, 214, 10);"}
+    ${(props) => props.is_on && `color: ${colors.PRIMARY_COLOR};`}
 
     transition: all 0.3s;
     cursor: pointer;
@@ -70,8 +71,8 @@ export const CaptionButton = styled.div`
 
 export const Caption = styled.div`
     position: absolute;
-    top: -20px;
+    top: -30px;
     left: 20px;
-    font-size: 12px;
+    font-size: 16px;
     color: rgba(255, 255, 255, 0.3);
 `;

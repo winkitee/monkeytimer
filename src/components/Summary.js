@@ -6,6 +6,7 @@ import { Line } from "react-chartjs-2";
 
 import { getDiffTimeString } from "../lib/utils";
 import { Button, ButtonContainer } from "../common/shared";
+import { colors } from "../styles/config";
 
 function TimeStamp({ timeString }) {
     return (
@@ -53,8 +54,8 @@ export default function Summary(props) {
                     label: "",
                     data: timelog.map((log) => parseInt(log.diffTime / 1000)),
                     fill: false,
-                    backgroundColor: "rgb(255, 214, 10)",
-                    borderColor: "rgba(255, 214, 10, 0.4)",
+                    backgroundColor: colors.PRIMARY_COLOR,
+                    borderColor: colors.PRIMARY_COLOR,
                 },
             ],
         };
@@ -62,9 +63,11 @@ export default function Summary(props) {
 
     const { count, average, total } = useMemo(() => getInfo(timelog), [
         timelog.length,
+        stopwatchname,
     ]);
     const lineData = useMemo(() => getLineDataTimeLog(timelog), [
         timelog.length,
+        stopwatchname,
     ]);
 
     return (
@@ -86,6 +89,18 @@ export default function Summary(props) {
                                 maintainAspectRatio: false,
                                 scales: {
                                     xAxes: [{ display: false }],
+                                    yAxes: [
+                                        {
+                                            ticks: {
+                                                beginAtZero: true,
+                                                callback: function (value) {
+                                                    return getDiffTimeString(
+                                                        value * 1000
+                                                    );
+                                                },
+                                            },
+                                        },
+                                    ],
                                 },
                                 tooltips: {
                                     callbacks: {
@@ -139,11 +154,11 @@ const SummaryContainer = styled.div`
         justify-self: start;
     }
     h3 {
-        color: rgb(255, 214, 10);
+        color: ${colors.PRIMARY_COLOR};
     }
     p {
         grid-column: 2 / 4;
-        font-size: 12px;
+        font-size: 16px;
         color: rgb(144, 144, 147);
         line-height: 1.8;
         justify-self: end;

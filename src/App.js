@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import "./App.css";
 import { IconContext } from "react-icons";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
@@ -10,6 +9,7 @@ import "firebase/auth";
 import Main from "./components/Main";
 import Loading from "./common/Loading";
 import { setStopwatchDataToLocalStorage } from "./common/api";
+import { colors } from "./styles/config";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -59,9 +59,14 @@ function App() {
     }, []);
 
     return (
-        <div className="App">
-            <div className="App-Container">
-                <Header>monkeytimer</Header>
+        <Container>
+            <AppContiner>
+                <Header
+                    style={{ cursor: "pointer" }}
+                    onClick={() => window.location.reload()}
+                >
+                    monkeytimer
+                </Header>
 
                 {is_loading ? (
                     <Loading />
@@ -88,13 +93,31 @@ function App() {
                         </NavMenu>
                     </>
                 )}
-            </div>
-        </div>
+            </AppContiner>
+        </Container>
     );
 }
 
+const Container = styled.div`
+    text-align: center;
+`;
+
+const AppContiner = styled.div`
+    background-color: ${colors.BACKGROUND_COLOR};
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    overflow: hidden;
+`;
+
 const Header = styled.div`
-    color: rgb(255, 214, 10);
+    color: ${colors.PRIMARY_COLOR};
     font-size: 38px;
     font-weight: 900;
 
