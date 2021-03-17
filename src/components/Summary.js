@@ -36,6 +36,7 @@ export default function Summary(props) {
         }
 
         let average = parseInt(total / count);
+        if (isNaN(average)) average = 0
 
         return {
             count,
@@ -158,7 +159,7 @@ const SummaryContainer = styled.div`
     }
     p {
         grid-column: 2 / 4;
-        font-size: 16px;
+        font-size: 14px;
         color: rgb(144, 144, 147);
         line-height: 1.8;
         justify-self: end;

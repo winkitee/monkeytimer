@@ -32,7 +32,7 @@ const Keys = styled.div`
     width: 200px;
     text-align: left;
     /* max-height: 20vh; */
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.8;
     overflow-y: hidden;
     color: rgb(144, 144, 147);
