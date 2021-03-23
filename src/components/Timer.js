@@ -6,11 +6,8 @@ import "react-circular-progressbar/dist/styles.css";
 import { AddInput } from "../common/shared";
 import { colors } from '../styles/config'
 
-function Timer({ startTime, endTime, isWorking }) {
-    const [min, setMin] = useState(40);
-
+function Timer({ min, onChangeTimerMin, startTime, endTime, isWorking }) {
     const timer = useMemo(() => 1000 * 60 * min, [min]);
-
     const diff = endTime - startTime;
     const progress = (diff / timer) * 100;
     const diffMin = parseInt(diff / 1000 / 60);
@@ -30,13 +27,7 @@ function Timer({ startTime, endTime, isWorking }) {
                 />
                 <Container>
                     <AddInput
-                        onChange={(e) =>
-                            setMin(
-                                !isNaN(e.target.value)
-                                    ? Number(e.target.value)
-                                    : 40
-                            )
-                        }
+                        onChange={onChangeTimerMin}
                         value={min - diffMin < 0 ? 0 : min - diffMin}
                         disabled={isWorking}
                         maxLength={3}

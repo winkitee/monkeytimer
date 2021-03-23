@@ -15,7 +15,7 @@ export default function Main({ user, name = "Base" }) {
     const [is_working, set_is_working] = useState(false);
     const [is_summary, set_is_summary] = useState(false);
 
-    // const [min, setMin] = useState(40);
+    const [min, setMin] = useState(40);
     const [stopwatchname, setStopwatchname] = useState(name);
     const [startTime, setStartTime] = useState(0);
     const [endTime, setEndTime] = useState(0);
@@ -26,9 +26,9 @@ export default function Main({ user, name = "Base" }) {
 
     const timer = React.useRef();
 
-    // function setTimerValue(e) {
-    //     !isNaN(e.target.value) ? Number(e.target.value) : 40;
-    // }
+    function setTimerValue(e) {
+        setMin(!isNaN(e.target.value) ? Number(e.target.value) : 40);
+    }
 
     function save() {
         const newlog = {
@@ -237,6 +237,8 @@ export default function Main({ user, name = "Base" }) {
             {is_summary ? null : is_timer ? (
                 <div style={{ zIndex: 1 }}>
                     <Timer
+                        min={min}
+                        onChangeTimerMin={setTimerValue}
                         startTime={startTime}
                         endTime={endTime}
                         isWorking={is_working}
