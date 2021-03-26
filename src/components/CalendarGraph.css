@@ -1,0 +1,11 @@
+.react-calendar-heatmap .color-scale-1 { fill: rgba(255, 255, 255, 0.3); }
+.react-calendar-heatmap .color-scale-2 { fill: rgba(255, 255, 255, 0.4); }
+.react-calendar-heatmap .color-scale-3 { fill: rgba(255, 255, 255, 0.5); }
+.react-calendar-heatmap .color-scale-4 { fill: rgba(255, 255, 255, 0.6); }
+.react-calendar-heatmap .color-scale-5 { fill: rgba(255, 255, 255, 0.7); }
+.react-calendar-heatmap .color-scale-6 { fill: rgba(255, 255, 255, 0.8); }
+.react-calendar-heatmap .color-scale-7 { fill: rgba(255, 255, 255, 0.9); }
+.react-calendar-heatmap .color-scale-8 { fill: rgba(255, 255, 255, 1.0); }
+.react-calendar-heatmap .color-empty {
+    fill: rgba(255, 255, 255, 0.1);
+  }

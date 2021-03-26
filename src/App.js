@@ -7,7 +7,9 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 import Main from "./components/Main";
+import CalendarGraph from './components/CalendarGraph'
 import Loading from "./common/Loading";
+import Header from './common/Header'
 import { setStopwatchDataToLocalStorage } from "./common/api";
 import { colors } from "./styles/config";
 
@@ -61,12 +63,7 @@ function App() {
     return (
         <Container>
             <AppContiner>
-                <Header
-                    style={{ cursor: "pointer" }}
-                    onClick={() => window.location.reload()}
-                >
-                    monkeytimer
-                </Header>
+                <Header />
 
                 {is_loading ? (
                     <Loading />
@@ -94,6 +91,9 @@ function App() {
                     </>
                 )}
             </AppContiner>
+            <GraphContainer>
+                <CalendarGraph />
+            </GraphContainer>
         </Container>
     );
 }
@@ -116,21 +116,6 @@ const AppContiner = styled.div`
     overflow: hidden;
 `;
 
-const Header = styled.div`
-    color: ${colors.PRIMARY_COLOR};
-    font-size: 38px;
-    font-weight: 900;
-
-    position: fixed;
-    top: 38px;
-    left: 48px;
-
-    @media (max-width: 500px) {
-        font-size: 18px;
-        top: 20px;
-        left: 20px;
-    }
-`;
 
 export const NavLinkContainer = styled.div`
     display: flex;
@@ -156,5 +141,14 @@ const NavMenu = styled.nav`
     bottom: 48px;
     right: 50px;
 `;
+
+const GraphContainer = styled.div`
+    position: fixed;
+    width: 100%;
+    bottom: 100px;
+
+    display: flex;
+    justify-content: center;
+`
 
 export default App;
