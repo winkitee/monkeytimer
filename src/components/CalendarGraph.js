@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react'
+import moment from 'moment'
 import CalendarHeatmap from "react-calendar-heatmap";
 import styled from 'styled-components'
 import 'react-calendar-heatmap/dist/styles.css'
 import './CalendarGraph.css'
-import moment from 'moment'
 
 
 function CalendarGraph() {
@@ -13,26 +12,30 @@ function CalendarGraph() {
     }
 
     function createCalendarValues() {
-        const keys = getKeys()
-        const calendarValueObj = {}
+        try {
+            const keys = getKeys()
+            const calendarValueObj = {}
 
-        for (const key of keys) {
-            const startTimes = getStartTimesFromKey(key)
-            for (const date of startTimes) {
-                if (date in calendarValueObj) {
-                    calendarValueObj[date] += 1
-                } else {
-                    calendarValueObj[date] = 1
+            for (const key of keys) {
+                const startTimes = getStartTimesFromKey(key)
+                for (const date of startTimes) {
+                    if (date in calendarValueObj) {
+                        calendarValueObj[date] += 1
+                    } else {
+                        calendarValueObj[date] = 1
+                    }
                 }
             }
+
+            const calendarValues = []
+            Object.keys(calendarValueObj).sort().forEach(date => {
+                calendarValues.push({ date, count: calendarValueObj[date] });
+            });
+
+            return calendarValues
+        } catch (e) {
+            return []
         }
-
-        const calendarValues = []
-        Object.keys(calendarValueObj).sort().forEach(date => {
-            calendarValues.push({ date, count: calendarValueObj[date] });
-        });
-
-        return calendarValues
     }
 
     function getKeys() {
@@ -55,7 +58,6 @@ function CalendarGraph() {
     }
 
     const [startDate, endDate] = currentStartDateAndEndDate();
-
     return (
         <Container>
             <CalendarHeatmap
