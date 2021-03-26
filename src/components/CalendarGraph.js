@@ -77,9 +77,16 @@ function CalendarGraph() {
 }
 
 const Container = styled.div`
-    width: 80%;
-    max-width: 740px;
+    width: 70%;
+    max-width: 640px;
     margin-bottom: 20px;
+
+    @media (max-width: 500px) {
+        display: none;
+    } 
+    @media (max-height: 800px) {
+        display: none;
+    } 
 `
 
 export default CalendarGraph

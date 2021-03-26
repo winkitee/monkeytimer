@@ -7,5 +7,5 @@
 .react-calendar-heatmap .color-scale-7 { fill: rgba(255, 255, 255, 0.9); }
 .react-calendar-heatmap .color-scale-8 { fill: rgba(255, 255, 255, 1.0); }
 .react-calendar-heatmap .color-empty {
-    fill: rgba(255, 255, 255, 0.1);
+    fill: rgba(255, 255, 255, 0.05);
   }

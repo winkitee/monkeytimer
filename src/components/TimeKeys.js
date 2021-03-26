@@ -37,7 +37,10 @@ const Keys = styled.div`
     overflow-y: hidden;
     color: rgb(144, 144, 147);
 
-    @media (max-width: 500px) {
+    @media (max-width: 700px) {
+        display: none;
+    }
+    @media (max-height: 800px) {
         display: none;
     }
 `;
