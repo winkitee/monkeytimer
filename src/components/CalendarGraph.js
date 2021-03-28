@@ -81,6 +81,12 @@ const Container = styled.div`
     max-width: 640px;
     margin-bottom: 20px;
 
+    transition: opacity 0.3s;
+    opacity: 0;
+    :hover {
+        opacity: 1;
+    }
+
     @media (max-width: 500px) {
         display: none;
     } 

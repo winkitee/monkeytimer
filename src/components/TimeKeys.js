@@ -37,6 +37,12 @@ const Keys = styled.div`
     overflow-y: hidden;
     color: rgb(144, 144, 147);
 
+    transition: opacity 0.3s;
+    opacity: 0;
+    :hover {
+        opacity: 1;
+    }
+
     @media (max-width: 700px) {
         display: none;
     }
