@@ -22,7 +22,7 @@ function createRGBStyleAttr(rgb, opacity=1) {
     return `rgb(${R}, ${G}, ${B})`
 }
 
-const isRandom = true;
+const isRandom = false;
 if (isRandom) {
     colors.PRIMARY_COLOR = createRGBStyleAttr(getRandomRGB(100, 255))
     colors.BACKGROUND_COLOR = createRGBStyleAttr(getRandomRGB(0, 100))
